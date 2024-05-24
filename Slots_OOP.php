@@ -1,7 +1,7 @@
 <?php
 
-$width = 5;
-$height = 3;
+$width = 10;
+$height = 6;
 
 $symbolProbabilities = [
     'Q' => 0.25,
@@ -54,12 +54,12 @@ class SlotMachine
 
     public function displayBoard(array $board, array $winningLines): void
     {
-        echo "Board:\n";
+        echo "Board:" . PHP_EOL;
         foreach ($board as $i => $row) {
             foreach ($row as $j => $symbol) {
                 echo in_array([$i, $j], $winningLines) ? "\033[0;32m$symbol\033[0m " : "$symbol ";
             }
-            echo "\n";
+            echo PHP_EOL;
         }
     }
 
@@ -130,13 +130,13 @@ class Game
             $winAmount = $this->slotMachine->calculateWinAmount($board, $this->betAmount);
 
             if ($winAmount > 0) {
-                echo $this->colorGreen . "Congratulations! You won!" . $this->colorReset . "\n";
+                echo $this->colorGreen . "Congratulations! You won!" . $this->colorReset . PHP_EOL;
             }
 
             $this->coins += $winAmount - $this->betAmount;
 
-            echo "Win Amount: $winAmount\n";
-            echo "Coins Left: $this->coins\n\n";
+            echo "Win Amount: $winAmount" . PHP_EOL;
+            echo "Coins Left: $this->coins" . PHP_EOL . PHP_EOL;
 
             if ($this->coins < $this->betAmount) {
                 echo "Game over! You ran out of coins.";
@@ -144,7 +144,7 @@ class Game
             } else {
                 $input = strtolower(readline("Continue? "));
                 if (trim($input) !== '') {
-                    echo "Bye! You have $this->coins coins left.\n";
+                    echo "Bye! You have $this->coins coins left." . PHP_EOL;
                     break;
                 }
             }
@@ -158,7 +158,7 @@ class Game
             if (is_numeric($number) && $number > 0) {
                 return (float)$number;
             }
-            echo "Invalid input. Please enter a valid positive number.\n";
+            echo "Invalid input. Please enter a valid positive number." . PHP_EOL;
         } while (true);
     }
 }
